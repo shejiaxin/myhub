@@ -155,3 +155,19 @@ typedef struct
     uint16_t  crc_sum;
 }CanPack07Cmd_t;
 CanPack07Cmd_t CanPack07Obj;
+
+
+static unsigned short CalcCRC16Sum(const void *s, int n) 
+{ 
+	 unsigned short c = 0xffff; 
+	 for(int k = 0; k < n; k++) 
+	 { 
+		 unsigned short b=(((unsigned char *)s)[k]); 
+		 for(char i=0; i<8; i++) 
+		 { 
+			 c = ((b^c)&1) ? (c>>1)^0xA001 : (c>>1); 
+			 b >>= 1;
+		 } 
+	 }
+	 return (c << 8)|(c >> 8);
+}
