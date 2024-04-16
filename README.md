@@ -126,3 +126,32 @@ void BMS_SendCanPackage(uint8_t cmd)
          send_bms_data_packet(idObj, (uint8_t*)&CanPack07Obj, sizeof(CanPack07Cmd_t));
 	 }
 }
+
+
+
+typedef struct tagLion_DataStruct
+{       
+    uint16_t temperature;
+    uint8_t  soc;
+    uint8_t  soh;
+    uint32_t total_volt;
+    uint16_t ave_current;
+    uint8_t hw_ver;
+    uint8_t sf_ver;
+    uint8_t opt_bit_ste;
+    uint8_t status[3];
+    uint8_t id_code[16];
+    uint16_t  crc_sum;
+}CanPack06Cmd_t;
+CanPack06Cmd_t CanPack06Obj;
+
+typedef struct
+{       
+    uint16_t residue_capacity;            
+    uint16_t full_capacity;               
+    uint16_t cycle_charge_cnt;            
+    uint8_t manufacturer_name[6];         
+    uint16_t cell_volt[20];
+    uint16_t  crc_sum;
+}CanPack07Cmd_t;
+CanPack07Cmd_t CanPack07Obj;
